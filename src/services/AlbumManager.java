@@ -2,17 +2,16 @@ package services;
 import models.Album;
 import utilities.FileManager;
 import java.util.ArrayList;
-import java.util.List;
 
 public class AlbumManager {
-    private List<Album> albums;
+    private ArrayList<Album> albums;
 
     public AlbumManager() {
         albums = FileManager.load();
     }
 
-    public List<Album> getAlbums() {
-        return new ArrayList<>(albums);
+    public ArrayList<Album> getAlbums() {
+        return albums;
     }
 
     public boolean addAlbum(Album album) {
