@@ -23,6 +23,7 @@ public class AlbumManager {
         }
 
         albums.add(album);
+        FileManager.save(albums);
         return true;
     }
 
@@ -30,6 +31,7 @@ public class AlbumManager {
         for (int i = 0; i < albums.size(); i++) {
             if (albums.get(i).getId().equals(id)) {
                 albums.remove(i);
+                FileManager.save(albums);
                 return true;
             }
         }
