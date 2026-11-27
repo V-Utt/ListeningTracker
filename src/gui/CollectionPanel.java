@@ -18,7 +18,7 @@ public class CollectionPanel {
         });
     }
 
-    private void createTable() {
+    public void createTable() {
         tableModel = new DefaultTableModel(
                 new String[]{"Album", "Artist", "Year", "Rating", "Status"}, 0
         ) {
@@ -46,5 +46,60 @@ public class CollectionPanel {
                         "Listened"
                 }
         );
+
+
+        table.getColumnModel().getColumn(4)
+                .setCellEditor(new DefaultCellEditor(statusBox));
+
+        tableModel.addTableModelListener(e -> {
+            if (e.getType() != javax.swing.event.TableModelEvent.UPDATE) {
+                return;
+            }
+
+            int row = e.getFirstRow();
+            int column = e.getColumn();
+
+            if (row < 0 || row >= manager.getAlbums().size()) {
+                return;
+            }
+
+            Album album = manager.getAlbums().get(row);
+
+            if (column == 3) {
+                int rating = Integer.parseInt(
+                        tableModel.getValueAt(row, 3).toString()
+                );
+
+                manager.updateRating(album.getId(), rating);
+
+            } else if (column == 4) {
+                String status = tableModel.getValueAt(row, 4).toString();
+                manager.updateStatus(album.getId(), status);
+            }
+        });
+
+        add(new JScrollPane(table), BorderLayout.CENTER);
+
+        JButton removeButton = new JButton("Remove Selected Album");
+        removeButton.addActionListener(e -> removeSelectedAlbum());
+
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        bottomPanel.add(removeButton);
+
+        add(bottomPanel, BorderLayout.SOUTH);
     }
+
+    private void removeSelectedAlbum() {
+        int selectedRow = table.getSelectedRow();
+
+        if (selectedRow == -1) {
+            return;
+        }
+
+        Album album = manager.getAlbums().get(selectedRow);
+
+        manager.removeAlbum(album.getId());
+    }
+
+
 }
