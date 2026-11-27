@@ -36,4 +36,24 @@ public class AlbumManager {
         }
         return false;
     }
+
+    public void updateRating(String id, int rating) {
+        for (int i = 0; i < albums.size(); i++) {
+            if (albums.get(i).getId().equals(id)) {
+                albums.get(i).setRating(rating);
+                FileManager.save(albums);
+                return;
+            }
+        }
+    }
+
+    public void updateUserStat(String id, String userStat) {
+        for (int i = 0; i < albums.size(); i++) {
+            if (albums.get(i).getId().equals(id)) {
+                albums.get(i).setUserStat(userStat);
+                FileManager.save(albums);
+                return;
+            }
+        }
+    }
 }
