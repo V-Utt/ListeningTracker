@@ -18,10 +18,12 @@ public class SearchBar extends JPanel{
     private DefaultTableModel tableModel;
     private JLabel messageLabel;
     private ArrayList<Album> searchResults;
+    private CollectionPanel collectionPanel;
 
-    public SearchBar(AlbumManager manager, ApiProcessor musicBrainz) {
+    public SearchBar(AlbumManager manager, ApiProcessor musicBrainz, CollectionPanel collectionPanel) {
         this.manager = manager;
         this.musicBrainz = musicBrainz;
+        this.collectionPanel = collectionPanel;
         setLayout(new BorderLayout(10, 10));
 
         makeSearchBar();
@@ -45,8 +47,8 @@ public class SearchBar extends JPanel{
 
 
             try {
+                tableModel.setRowCount(0);
                 searchResults = musicBrainz.searchFunc(req);
-
                 for (int i = 0; i < searchResults.size(); i++) {
                     tableModel.addRow(new Object[]{searchResults.get(i).getName(), searchResults.get(i).getArtist(), searchResults.get(i).getYear()});
 
@@ -70,8 +72,8 @@ public class SearchBar extends JPanel{
 
 
             try {
+                tableModel.setRowCount(0);
                 searchResults = musicBrainz.searchFunc(req);
-
                 for (int i = 0; i < searchResults.size(); i++) {
                     tableModel.addRow(new Object[]{searchResults.get(i).getName(), searchResults.get(i).getArtist(), searchResults.get(i).getYear()});
 
@@ -108,9 +110,20 @@ public class SearchBar extends JPanel{
         JButton addButton = new JButton("add");
         addButton.addActionListener(e -> {
             int rowToMod = resultsTable.getSelectedRow();
+            if (rowToMod == -1) {
+                messageLabel.setText("Select an album first");
+                return;
+            }
+
 
             Album album = searchResults.get(rowToMod);
-            manager.addAlbum(album);
+            boolean checks = manager.addAlbum(album);
+            if (checks) {
+                messageLabel.setText("Album added");
+            } else {
+                messageLabel.setText("Fail");
+            }
+            collectionPanel.refreshTable();
         });
 
         JPanel botPanel = new JPanel();

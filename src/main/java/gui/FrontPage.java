@@ -20,7 +20,7 @@ public class FrontPage extends JFrame {
 
         this.collectionPanel = new CollectionPanel(manager);
 
-        SearchBar search = new SearchBar(manager, musicBrainz);
+        SearchBar search = new SearchBar(manager, musicBrainz, this.collectionPanel);
 
         setLayout(new BorderLayout(10, 10));
 

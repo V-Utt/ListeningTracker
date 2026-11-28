@@ -105,8 +105,22 @@ public class CollectionPanel extends JPanel{
         }
 
         Album album = manager.getAlbums().get(selectedRow);
-
         manager.removeAlbum(album.getId());
+        refreshTable();
+    }
+
+    public void refreshTable() {
+        tableModel.setRowCount(0);
+
+        for (Album album : manager.getAlbums()) {
+            tableModel.addRow(new Object[]{
+                    album.getName(),
+                    album.getArtist(),
+                    album.getYear(),
+                    album.getRating(),
+                    album.getUserStat()
+            });
+        }
     }
 
 
