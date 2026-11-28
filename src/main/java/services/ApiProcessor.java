@@ -24,7 +24,7 @@ public class ApiProcessor {
                 + "?query=" + encodedReq
                 + "&fmt=json&limit=20";
 
-        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(completeUrl)).header("User", "ListeningTracker/1.0 (music stats app)").GET().build();
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(completeUrl)).header("User-Agent", "ListeningTracker/1.0 (varun.utt07@gmail.com)").GET().build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
@@ -43,7 +43,11 @@ public class ApiProcessor {
             JsonObject release = part.getAsJsonObject();
             String id = release.get("id").getAsString();
             String title = release.get("title").getAsString();
-            String date = release.get("date").getAsString(); //potential error here with "date"
+            String date = "";
+
+            if (release.has("date") && !release.get("date").isJsonNull()) {
+                date = release.get("date").getAsString();
+            }
 
             String year = "";
             if (date.length() >= 4) {
