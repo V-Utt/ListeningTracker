@@ -21,8 +21,8 @@ public class Album {
         return this.id;
     }
 
-    public String getTitle() {
-        return this.title;
+    public String getName() {
+        return this.name;
     }
 
     public String getArtist() {

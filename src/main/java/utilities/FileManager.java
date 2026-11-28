@@ -41,7 +41,7 @@ public class FileManager {
                 Album album = new Album(decode(pathSplit[0]), decode(pathSplit[1]), decode(pathSplit[2]), decode(pathSplit[3]));
 
                 album.setRating(Integer.parseInt(pathSplit[4]));
-                album.setStatus(decode(pathSplit[5]));
+                album.setUserStat(decode(pathSplit[5]));
 
                 albumList.add(album);
             }

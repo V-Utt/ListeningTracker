@@ -8,7 +8,6 @@ import java.nio.charset.StandardCharsets;
 import java.net.http.*;
 import java.util.ArrayList;
 import java.io.*;
-import org.json.*;
 
 public class ApiProcessor {
     private final HttpClient client;
@@ -41,7 +40,7 @@ public class ApiProcessor {
         JsonArray releases = json.getAsJsonArray("releases");
 
         for (JsonElement part : releases) {
-            JsonObject release = element.getAsJsonObject();
+            JsonObject release = part.getAsJsonObject();
             String id = release.get("id").getAsString();
             String title = release.get("title").getAsString();
             String date = release.get("date").getAsString(); //potential error here with "date"
