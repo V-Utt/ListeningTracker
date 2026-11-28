@@ -30,6 +30,30 @@ public class SearchBar extends JPanel{
     }
 
     public void makeSearchBar() {
+        JPanel topPanel = new JPanel(new BorderLayout(10, 10));
+        JLabel title = new JLabel("search");
+        searchField = new JTextField();
+        searchButton = new JButton("search");
+
+        searchButton.addActionListener(e -> {
+
+        });
+
+        searchField.addActionListener(e -> {
+
+        });
+
+        JPanel searchPanel = new JPanel(new BorderLayout(10, 0));
+        searchPanel.add(searchField, BorderLayout.CENTER);
+        searchPanel.add(searchButton, BorderLayout.EAST);
+
+        topPanel.add(title, BorderLayout.NORTH);
+        topPanel.add(searchPanel, BorderLayout.CENTER);
+
+        add(topPanel, BorderLayout.NORTH);
+
+        messageLabel = new JLabel("search");
+        add(messageLabel, BorderLayout.SOUTH);
 
     }
 
