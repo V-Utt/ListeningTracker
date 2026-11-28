@@ -23,7 +23,10 @@ public class SearchBar extends JPanel{
         this.manager = manager;
         this.musicBrainz = musicBrainz;
         setLayout(new BorderLayout(10, 10));
-        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        makeSearchBar();
+        showSearchResults();
+
     }
 
     public void makeSearchBar() {
