@@ -100,7 +100,23 @@ public class SearchBar extends JPanel{
     }
 
     public void showSearchResults() {
+        tableModel = new DefaultTableModel(searchResults.size(), 0);
 
+        JButton addButton = new JButton("add");
+        addButton.addActionListener(e -> {
+
+        });
+
+        resultsTable = new JTable(tableModel);
+
+        JScrollPane scrollPane = new JScrollPane(resultsTable);
+
+        JPanel botPanel = new JPanel();
+        botPanel.add(addButton);
+
+        JPanel midPanel = new JPanel(new BorderLayout(0, 10));
+        midPanel.add(botPanel, BorderLayout.SOUTH);
+        add(midPanel, BorderLayout.CENTER);
     }
 
 
