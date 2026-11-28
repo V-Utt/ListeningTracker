@@ -3,10 +3,18 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
+import models.Album;
+import services.AlbumManager;
 
-public class CollectionPanel {
-    public CollectionPanel() {
-        SwingUtilities.invokeLater(() -> {
+
+
+public class CollectionPanel extends JPanel{
+    private JTable table;
+    private DefaultTableModel tableModel;
+    private AlbumManager manager;
+
+    public CollectionPanel(AlbumManager manager) {
+        this.manager = manager;
             setLayout(new BorderLayout(10, 10));
             setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
@@ -15,7 +23,7 @@ public class CollectionPanel {
             add(title, BorderLayout.NORTH);
 
             createTable();
-        });
+
     }
 
     public void createTable() {
@@ -74,7 +82,7 @@ public class CollectionPanel {
 
             } else if (column == 4) {
                 String status = tableModel.getValueAt(row, 4).toString();
-                manager.updateStatus(album.getId(), status);
+                manager.updateUserStat(album.getId(), status);
             }
         });
 
@@ -100,6 +108,5 @@ public class CollectionPanel {
 
         manager.removeAlbum(album.getId());
     }
-
 
 }
