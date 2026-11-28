@@ -4,6 +4,7 @@ import models.Album;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.nio.file.*;
 
 public class FileManager {
     private static final String filePath = "data/albums.txt";
@@ -53,5 +54,29 @@ public class FileManager {
 
         return albumList;
     }
+
+    public static void save(ArrayList<Album> albums) {
+        try {
+            Path path = Paths.get(filePath);
+            Files.createDirectories(path.getParent());
+
+            try (BufferedWriter writer = Files.newBufferedWriter(path)) {
+                for (Album album : albums) {
+                    writer.write(
+                            encode(album.getId()) + "\t" +
+                                    encode(album.getName()) + "\t" +
+                                    encode(album.getArtist()) + "\t" +
+                                    encode(album.getYear()) + "\t" +
+                                    album.getRating() + "\t" +
+                                    encode(album.getUserStat())
+                    );
+                    writer.newLine();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
