@@ -100,11 +100,14 @@ public class SearchBar extends JPanel{
     }
 
     public void showSearchResults() {
-        tableModel = new DefaultTableModel(searchResults.size(), 0);
+        tableModel = new DefaultTableModel(new String[]{"Album", "Artist", "Year"}, 0);
 
         JButton addButton = new JButton("add");
         addButton.addActionListener(e -> {
+            int rowToMod = resultsTable.getSelectedRow();
 
+            Album album = searchResults.get(rowToMod);
+            manager.addAlbum(album);
         });
 
         resultsTable = new JTable(tableModel);
