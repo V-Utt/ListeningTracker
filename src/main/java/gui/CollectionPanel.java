@@ -109,4 +109,6 @@ public class CollectionPanel extends JPanel{
         manager.removeAlbum(album.getId());
     }
 
+
+
 }

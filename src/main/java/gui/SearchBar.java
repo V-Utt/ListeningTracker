@@ -11,7 +11,6 @@ import java.util.List;
 public class SearchBar extends JPanel{
     private final AlbumManager manager;
     private final ApiProcessor musicBrainz;
-    private final Runnable refresh;
 
     private JTextField searchField;
     private JButton searchButton;
@@ -20,11 +19,9 @@ public class SearchBar extends JPanel{
     private JLabel messageLabel;
     private List<Album> searchResults;
 
-    public SearchBar(AlbumManager manager, ApiProcessor musicBrainz, Runnable refresh) {
+    public SearchBar(AlbumManager manager, ApiProcessor musicBrainz) {
         this.manager = manager;
         this.musicBrainz = musicBrainz;
-        this.refresh = refresh;
-
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
