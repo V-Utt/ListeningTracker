@@ -36,10 +36,52 @@ public class SearchBar extends JPanel{
         searchButton = new JButton("search");
 
         searchButton.addActionListener(e -> {
+            String req =  searchField.getText();
+
+            if (req.isEmpty()) {
+                messageLabel.setText("Enter something");
+                return;
+            }
+
+
+            try {
+                searchResults = musicBrainz.searchFunc(req);
+
+                for (int i = 0; i < searchResults.size(); i++) {
+                    tableModel.addRow(new Object[]{searchResults.get(i).getName(), searchResults.get(i).getArtist(), searchResults.get(i).getYear()});
+
+                }
+
+                messageLabel.setText("Search results: " + searchResults.size());
+
+            } catch (Exception a) {
+                a.printStackTrace();
+            }
 
         });
 
         searchField.addActionListener(e -> {
+            String req =  searchField.getText();
+
+            if (req.isEmpty()) {
+                messageLabel.setText("Enter something");
+                return;
+            }
+
+
+            try {
+                searchResults = musicBrainz.searchFunc(req);
+
+                for (int i = 0; i < searchResults.size(); i++) {
+                    tableModel.addRow(new Object[]{searchResults.get(i).getName(), searchResults.get(i).getArtist(), searchResults.get(i).getYear()});
+
+                }
+
+                messageLabel.setText("Search results: " + searchResults.size());
+
+            } catch (Exception a) {
+                a.printStackTrace();
+            }
 
         });
 
