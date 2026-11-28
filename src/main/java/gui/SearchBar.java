@@ -6,7 +6,7 @@ import services.ApiProcessor;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.List;
+import java.util.ArrayList;
 
 public class SearchBar extends JPanel{
     private final AlbumManager manager;
@@ -17,13 +17,20 @@ public class SearchBar extends JPanel{
     private JTable resultsTable;
     private DefaultTableModel tableModel;
     private JLabel messageLabel;
-    private List<Album> searchResults;
+    private ArrayList<Album> searchResults;
 
     public SearchBar(AlbumManager manager, ApiProcessor musicBrainz) {
         this.manager = manager;
         this.musicBrainz = musicBrainz;
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+    }
+
+    public void makeSearchBar() {
+
+    }
+
+    public void showSearchResults() {
 
     }
 
